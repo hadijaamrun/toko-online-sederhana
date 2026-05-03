@@ -10,13 +10,13 @@ export const AuthProvider = ({ children }) => {
   });
 
   const login = async (email, password) => {
-    const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
+    const response = await axios.post('https://toko-online-sederhana.vercel.app/api/users/login', { email, password });
     setUser(response.data);
     localStorage.setItem('userInfo', JSON.stringify(response.data)); 
   };
 
   const register = async (name, email, password) => {
-    const response = await axios.post('http://localhost:5000/api/users/register', { name, email, password });
+    const response = await axios.post('https://toko-online-sederhana.vercel.app/api/users/register', { name, email, password });
     setUser(response.data);
     localStorage.setItem('userInfo', JSON.stringify(response.data)); 
   };

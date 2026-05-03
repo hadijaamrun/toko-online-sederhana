@@ -35,7 +35,7 @@ const ProductDetail = () => {
       <Link to="/products" className="back-link">&larr; Kembali ke Daftar Produk</Link>
       <div className="detail-layout">
         <div className="detail-image-wrapper">
-          <img src={`${API_URL}${product.image}`} alt={product.name} className="detail-image" />
+          <img src={`/${product.image}`} alt={product.name} className="detail-image" />
         </div>
         <div className="detail-info">
           <span className="product-badge">TOS Original</span>
