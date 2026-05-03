@@ -16,7 +16,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get('https://toko-online-sederhana.vercel.app/api/products');
+        const response = await axios.get(`https://toko-online-sederhana.vercel.app/api/products/${id}`);
         setProduct({ ...response.data, id: response.data._id });
       } catch (err) {
         console.error("Error:", err);
