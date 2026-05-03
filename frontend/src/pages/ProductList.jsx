@@ -32,7 +32,7 @@ const ProductList = () => {
       <div className="product-grid">
         {products.map((product) => (
           <div key={product.id} className="product-card">
-            <img src={`${API_URL}${product.image}`} alt={product.name} />
+            <img src={`/${product.image}`} alt={product.name} />
             <h3>{product.name}</h3>
             <p>Rp {product.price.toLocaleString('id-ID')}</p>
             <Link to={`/products/${product.id}`} className="btn-detail">Lihat Detail</Link>
