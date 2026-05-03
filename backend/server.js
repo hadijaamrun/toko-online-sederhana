@@ -17,10 +17,19 @@ app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'public/images')));
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('✅ Terhubung ke database MongoDB Atlas'))
-  .catch((err) => console.error('❌ Gagal terhubung ke MongoDB:', err));
+const connectDB = async () => {
+  if (mongoose.connection.readyState >= 1) {
+    return;
+  }
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log('✅ Terhubung ke database');
+  } catch (err) {
+    console.error('❌ Gagal terhubung ke MongoDB:', err);
+  }
+};
 
+connectDB();
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes); 
 

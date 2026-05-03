@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Product.css'; 
 
-const API_URL = 'http://localhost:5000/uploads/';
+const API_URL = 'https://toko-online-sederhana.vercel.app/';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -12,7 +12,7 @@ const ProductList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/products');
+        const response = await axios.get('https://toko-online-sederhana.vercel.app/api/products');
         const normalizedData = response.data.map(item => ({ ...item, id: item._id }));
         setProducts(normalizedData);
       } catch (err) {
