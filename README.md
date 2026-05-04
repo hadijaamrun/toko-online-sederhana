@@ -1,4 +1,5 @@
-# TOS - Toko Online Sederhana
+Markdown
+# TOS - Toko Online Sederhana 
 
 TOS adalah aplikasi e-commerce sederhana berbasis web yang dibangun menggunakan **MERN Stack** (MongoDB, Express.js, React, Node.js). Aplikasi ini memungkinkan pengguna untuk melihat daftar produk, melihat detail produk, mengelola keranjang belanja, serta melakukan pendaftaran akun.
 
@@ -9,13 +10,13 @@ TOS adalah aplikasi e-commerce sederhana berbasis web yang dibangun menggunakan 
 *   **Keranjang Belanja**: Menambah, menghapus, dan memperbarui jumlah item di keranjang dengan kalkulasi total harga otomatis.
 *   **Responsive Design**: Tampilan yang optimal di berbagai perangkat.
 
-## Teknologi yang Digunakan
+##  Teknologi yang Digunakan
 *   **Frontend**: React.js, Vite, Axios, React Router, Context API.
 *   **Backend**: Node.js, Express.js.
 *   **Database**: MongoDB Atlas (Cloud).
 *   **Deployment**: Vercel (Frontend & Backend).
 
-## 📁 Struktur Folder
+##  Struktur Folder
 ```text
 toko-online/
 ├── backend/            # Server-side (Node.js & Express)
@@ -38,7 +39,6 @@ Clone Repositori
 Bash
 git clone [https://github.com/username-anda/toko-online-sederhana.git](https://github.com/username-anda/toko-online-sederhana.git)
 cd toko-online-sederhana
-
 Setup Backend
 
 Bash
@@ -57,9 +57,8 @@ Bash
 cd ../frontend
 npm install
 npm run dev
-
-Link Deployment
+🌐 Link Deployment
 Frontend (Website): https://toko-kasual-sederhana.vercel.app
+
 Backend API: https://toko-online-sederhana.vercel.app/api/products
 
-Website ini dirancang dan dibangun untuk Submission Personal Assignment 2 Specialized Platform Development
