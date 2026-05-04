@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import '../styles/cart.css';
 
-const API_URL = 'http://localhost:5000/uploads/';
-
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity, getCartTotal } = useContext(CartContext);
 
@@ -29,7 +27,7 @@ const Cart = () => {
         <div className="cart-items">
           {cart.map((item) => (
             <div key={item.id} className="cart-item">
-              <img src={`${API_URL}${item.image}`} alt={item.name} />
+              <img src={`/${item.image}`} alt={item.name} />
               <div className="cart-item-info">
                 <h3>{item.name}</h3>
                 <p className="cart-item-price">Rp {item.price.toLocaleString('id-ID')}</p>
