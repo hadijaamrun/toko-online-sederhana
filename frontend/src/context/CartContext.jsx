@@ -1,24 +1,49 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import { AuthContext } from './AuthContext'; 
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
+  const { user } = useContext(AuthContext);
+  const [cart, setCart] = useState([]);
   
-  const [cart, setCart] = useState(() => {
-    try {
-      const savedCart = localStorage.getItem('cartItems');
-      const parsedCart = savedCart ? JSON.parse(savedCart) : [];
-      return Array.isArray(parsedCart) ? parsedCart : [];
-    } catch (error) {
-      console.error("Data keranjang rusak, mengulang dari awal...", error);
-      return []; 
-    }
-  });
+  useEffect(() => {
+    const fetchCartFromDB = async () => {
+      if (user && user._id) {
+        try {
+          const response = await axios.get(`https://toko-online-sederhana.vercel.app/api/cart/${user._id}`);
+          setCart(response.data);
+        } catch (error) {
+          console.error("Gagal menarik keranjang dari database:", error);
+        }
+      } else {
+        const savedCart = localStorage.getItem('cartItems_guest');
+        setCart(savedCart ? JSON.parse(savedCart) : []);
+      }
+    };
+    
+    fetchCartFromDB();
+  }, [user]);
 
   useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cart));
-  }, [cart]);
+    const syncCartToDB = async () => {
+      if (user && user._id) {
+        try {e
+          await axios.post('https://toko-online-sederhana.vercel.app/api/cart/sync', {
+            userId: user._id,
+            cartItems: cart
+          });
+        } catch (error) {
+          console.error("Gagal menyimpan keranjang ke database:", error);
+        }
+      } else {
+        localStorage.setItem('cartItems_guest', JSON.stringify(cart));
+      }
+    };
+
+    syncCartToDB();
+  }, [cart, user]);
 
   const addToCart = (product, quantity = 1) => { 
     setCart((prevCart) => {
@@ -56,7 +81,6 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCart([]);
-    localStorage.removeItem('cartItems');
   };
 
   const getCartTotal = () => {

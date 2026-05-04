@@ -25,7 +25,6 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem('userInfo'); 
     
-    localStorage.removeItem('cartItems'); 
     window.location.reload(); 
   };
 
