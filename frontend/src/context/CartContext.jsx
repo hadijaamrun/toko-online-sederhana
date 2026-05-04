@@ -20,7 +20,7 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem('cartItems', JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product) => {
+const addToCart = (product, quantity = 1) => { 
     setCart((prevCart) => {
       const existingProductIndex = prevCart.findIndex((item) => item.id === product.id);
 
@@ -28,11 +28,11 @@ export const CartProvider = ({ children }) => {
         const updatedCart = [...prevCart];
         updatedCart[existingProductIndex] = {
           ...updatedCart[existingProductIndex],
-          quantity: updatedCart[existingProductIndex].quantity + 1,
+          quantity: updatedCart[existingProductIndex].quantity + quantity,
         };
         return updatedCart;
       } else {
-        return [...prevCart, { ...product, quantity: 1 }];
+        return [...prevCart, { ...product, quantity: quantity }];
       }
     });
   };
