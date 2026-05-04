@@ -12,7 +12,7 @@ TOS adalah aplikasi e-commerce sederhana berbasis web yang dibangun menggunakan 
 ##  Teknologi yang Digunakan
 *   **Frontend**: React.js, Vite, Axios, React Router, Context API.
 *   **Backend**: Node.js, Express.js.
-*   **Database**: MongoDB Atlas (Cloud).
+*   **Database**: MongoDB Atlas.
 *   **Deployment**: Vercel (Frontend & Backend).
 
 ##  Link Deployment
