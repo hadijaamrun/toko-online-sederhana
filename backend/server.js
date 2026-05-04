@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js'; 
+import cartRoutes from './routes/cartRoutes.js';
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ app.use(async (req, res, next) => {
 
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/cart', cartRoutes);
 
 app.get('/', (req, res) => {
   res.send('API Toko Online Berjalan Lancar! 🚀');

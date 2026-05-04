@@ -29,7 +29,7 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     const syncCartToDB = async () => {
       if (user && user._id) {
-        try {e
+        try {
           await axios.post('https://toko-online-sederhana.vercel.app/api/cart/sync', {
             userId: user._id,
             cartItems: cart
