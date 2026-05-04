@@ -8,18 +8,25 @@ export const CartProvider = ({ children }) => {
   const { user } = useContext(AuthContext);
   const [cart, setCart] = useState([]);
   
+  const [isCartLoaded, setIsCartLoaded] = useState(false); 
+  
   useEffect(() => {
     const fetchCartFromDB = async () => {
+      setIsCartLoaded(false); 
+      
       if (user && user._id) {
         try {
           const response = await axios.get(`https://toko-online-sederhana.vercel.app/api/cart/${user._id}`);
           setCart(response.data);
         } catch (error) {
           console.error("Gagal menarik keranjang dari database:", error);
+        } finally {
+          setIsCartLoaded(true); 
         }
       } else {
         const savedCart = localStorage.getItem('cartItems_guest');
         setCart(savedCart ? JSON.parse(savedCart) : []);
+        setIsCartLoaded(true); 
       }
     };
     
@@ -28,6 +35,8 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     const syncCartToDB = async () => {
+      if (!isCartLoaded) return; 
+
       if (user && user._id) {
         try {
           await axios.post('https://toko-online-sederhana.vercel.app/api/cart/sync', {
@@ -43,7 +52,7 @@ export const CartProvider = ({ children }) => {
     };
 
     syncCartToDB();
-  }, [cart, user]);
+  }, [cart, user, isCartLoaded]); 
 
   const addToCart = (product, quantity = 1) => { 
     setCart((prevCart) => {
