@@ -9,7 +9,6 @@ export const CartProvider = ({ children }) => {
     try {
       const savedCart = localStorage.getItem('cartItems');
       const parsedCart = savedCart ? JSON.parse(savedCart) : [];
-      
       return Array.isArray(parsedCart) ? parsedCart : [];
     } catch (error) {
       console.error("Data keranjang rusak, mengulang dari awal...", error);
@@ -23,7 +22,7 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (product) => {
     setCart((prevCart) => {
-      const existingProductIndex = prevCart.findIndex((item) => item._id === product._id);
+      const existingProductIndex = prevCart.findIndex((item) => item.id === product.id);
 
       if (existingProductIndex >= 0) {
         const updatedCart = [...prevCart];
@@ -38,22 +37,13 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  const decreaseQuantity = (productId) => {
-    setCart((prevCart) => {
-      return prevCart.map((item) => {
-        if (item._id === productId) {
-          return { ...item, quantity: Math.max(1, item.quantity - 1) };
-        }
-        return item;
-      });
-    });
-  };
+  const updateQuantity = (productId, newQuantity) => {
+    if (newQuantity < 1) return; 
 
-  const increaseQuantity = (productId) => {
     setCart((prevCart) => {
       return prevCart.map((item) => {
-        if (item._id === productId) {
-          return { ...item, quantity: item.quantity + 1 };
+        if (item.id === productId) {
+          return { ...item, quantity: newQuantity };
         }
         return item;
       });
@@ -61,7 +51,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (productId) => {
-    setCart((prevCart) => prevCart.filter((item) => item._id !== productId));
+    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
   };
 
   const clearCart = () => {
@@ -78,8 +68,7 @@ export const CartProvider = ({ children }) => {
       value={{ 
         cart, 
         addToCart, 
-        decreaseQuantity, 
-        increaseQuantity, 
+        updateQuantity, 
         removeFromCart, 
         clearCart,
         getCartTotal
